@@ -3,7 +3,7 @@ import { QueryClientProvider, useQuery, QueryClient } from "react-query";
 import { useParams } from "react-router";
 import { CustomDiv, Divider } from '../components/CustomStyling';
 import Layout from "../Layout";
-import { fetchTrackBy } from "../utils/services";
+import { fetchTrackById } from "../utils/services";
 // assets
 import Spinner from "../assets/spinner.svg";
 import { Container, Row, Col } from 'react-bootstrap';
@@ -29,7 +29,7 @@ const Img = styled.img`
 `
 function TrackInfo() {
     let { id } = useParams()
-    const { isLoading, error, data: track } = useQuery('track', () => fetchTrackBy({ id }))
+    const { isLoading, error, data: track } = useQuery('track', () => fetchTrackById({ id }))
     if (isLoading) {
         return (
             <CustomDiv>
