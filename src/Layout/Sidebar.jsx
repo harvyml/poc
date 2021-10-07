@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Nav } from 'react-bootstrap'
 import styled from 'styled-components'
 // custom components
-import { CustomDiv, SideNavLink } from './components/CustomStyling'
+import { CustomDiv, SideNavLink } from '../components/CustomStyling'
 // custom images
 import RandomLogo from '../assets/random-logo.png'
 

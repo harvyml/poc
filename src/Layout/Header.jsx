@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { ColCustomed, CustomDiv, NavLink } from './components/CustomStyling'
+import { ColCustomed, CustomDiv, NavLink } from '../components/CustomStyling'
 import { Row, Container, Nav, NavDropdown } from 'react-bootstrap'
 //icons
 //contexts

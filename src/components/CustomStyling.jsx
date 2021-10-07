@@ -94,3 +94,20 @@ export const CustomButton = styled(Button)`
         background: ${background};
     `}
 `
+
+
+export const Divider = styled.div`
+    ${({width = '100%', height = '1px', background = '#f0f0f0', margin = ''}) => `
+        height: ${height};
+        width: ${width};
+        margin: ${margin};
+        background: ${background};
+    `}
+`
+
+export const Title = styled.h1`
+	${({ textAlign = 'left', fontSize = '14px' }) => `
+		text-align: ${textAlign};
+		font-size: ${fontSize};
+	`}
+`
