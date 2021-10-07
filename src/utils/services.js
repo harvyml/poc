@@ -2,6 +2,7 @@ import { Redirect } from "react-router";
 import { data } from "./db"
 const { users } = data;
 
+const api = 'https://thingproxy.freeboard.io/fetch/https://api.deezer.com'
 /**
  * onSignin
  * @param {Object}: {email, password}
@@ -23,11 +24,26 @@ export function onSignin({ email, password }) {
 }
 
 
-export function isLoggedIn(){
+export function isLoggedIn() {
     const uid = localStorage.getItem('uid')
     const loggedInUser = users.find(user => user.uid == uid)
-    console.log('loggedInUser', loggedInUser)
-    if(loggedInUser){
+    if (loggedInUser) {
         window.location.replace("/panel/music");
     }
+}
+
+export function getUserData(){
+    const uid = localStorage.getItem('uid')
+    const loggedInUser = users.find(user => user.uid == uid)
+    if (loggedInUser) {
+        console.log('user:', loggedInUser)
+        return loggedInUser
+    }
+    return null
+}
+
+export async function fetchBy({ keyword, startAt, limit }) {
+    const request = await fetch(`${api}/search?q=${keyword}&index=${startAt}&limit=${limit}`, { method: "GET" })
+    return await request.json()
+
 }
