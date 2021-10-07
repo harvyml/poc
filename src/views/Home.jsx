@@ -8,7 +8,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 // svg loader
 import Spinner from "../assets/spinner.svg";
-import { NavLink } from "../components/CustomStyling";
 
 
 function Main() {
@@ -20,9 +19,8 @@ function Main() {
     })
 
     async function fetchData() {
-        const request = await fetchManyBy({ keyword: 'arctic monkeys', startAt: page.startAt, limit: page.limit })
+        const request = await fetchManyBy({ keyword: 'andres cepeda', startAt: page.startAt, limit: page.limit })
         const res = await request
-        console.log(res)
         setMusic(current => current.concat(res.data))
     }
 
@@ -56,7 +54,6 @@ function Main() {
             >
                 <Row xs={1} md={4} className="g-6">
                     {music.map((item, idx) => {
-                        console.log("item: ", item)
                         return (
                             <Col key={`music-card-${idx}`} style={{ margin: "10px 0", cursor: "pointer" }}>
                                 <Card>

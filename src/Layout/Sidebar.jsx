@@ -26,8 +26,8 @@ function Sidenav() {
     let currentPath = ''
     return (
         <Nav defaultActiveKey="/home" className="flex-column sidenav">
-            <SideNavLink href={`${currentPath}/home`}>Home</SideNavLink>
-            <SideNavLink href={`${currentPath}/music`}>music</SideNavLink>
+            <SideNavLink href={`/panel/home`}>Home</SideNavLink>
+            <SideNavLink href={`/panel/dummy`}>Dummy</SideNavLink>
             <SideNavLink className="btn-logout" >
                 Logout
             </SideNavLink>

@@ -5,7 +5,6 @@ import Home from './Home';
 import Track from './Track';
 function Panel() {
 	const { path } = useRouteMatch()
-	console.log('Path: ', path)
 	return (
 		<Switch>
 			<Route exact path={`${path}/home`} >

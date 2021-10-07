@@ -18,7 +18,6 @@ export function onSignin({ email, password }) {
 
     if (isPasswordCorrect) {
         localStorage.setItem("uid", user.uid)
-        console.log(localStorage.getItem("uid"))
         return { ...user, code: 2001 }
     }
 }
@@ -36,7 +35,6 @@ export function getUserData(){
     const uid = localStorage.getItem('uid')
     const loggedInUser = users.find(user => user.uid == uid)
     if (loggedInUser) {
-        console.log('user:', loggedInUser)
         return loggedInUser
     }
     return null

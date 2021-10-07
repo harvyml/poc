@@ -9,7 +9,6 @@ export default function Header() {
 
     useEffect(() => {
         setUser(getUserData())
-        console.log(user)
     }, [user])
     return (
         <CustomDiv width='100%' textAlign='left' background='#f0f0f0' padding='10px 0' fontSize='.9rem'>
