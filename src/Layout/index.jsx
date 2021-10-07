@@ -2,8 +2,8 @@ import Sidebar from './Sidebar'
 import Header from './Header'
 
 // bootstrap components
-import { Row, Col, Container } from 'react-bootstrap'
-import { ColCustomed } from './components/CustomStyling'
+import { Row, Container } from 'react-bootstrap'
+import { ColCustomed } from '../components/CustomStyling'
 
 export default function Layout({children}) {
     return (
