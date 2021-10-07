@@ -3,7 +3,7 @@ import { Divider } from "../components/CustomStyling";
 import { fetchBy } from "../utils/services";
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col } from "react-bootstrap";
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 function Main() {
     const [state, setState] = useState({
         data: []
@@ -12,39 +12,59 @@ function Main() {
         startAt: 0,
         limit: 10
     })
-    useEffect(() => {
-        async function fetchData() {
-            const request = await fetchBy({ keyword: 'arctic monkeys', startAt: page.startAt, limit: page.limit })
-            const res = await request
-            setState(res)
-        }
 
-        fetchData()
-    }, [page.limit, page.startAt])
+    async function fetchData() {
+        const request = await fetchBy({ keyword: 'arctic monkeys', startAt: page.startAt, limit: page.limit })
+        const res = await request
+        setState(res)
+    }
+
+    useEffect(() => {
+        setTimeout(fetchData, 1000)
+    }, [page.startAt, page.limit])
 
     useEffect(() => {
         console.log(state)
     }, [state])
 
 
+    function fetchMoreData() {
+        setPage(current => {
+            return { startAt: current.startAt + 20, limit: current.limit + 20 }
+        })
+    }
     return (
-        <React.Fragment>
-            <Row xs={1} md={2} className="g-4">
-                {state.data.map((item, idx) => (
-                    <Col key={`music-card-${idx}`}>
-                        <Card>
-                            <Card.Img variant="top" src={item.album.cover_big} />
-                            <Card.Body>
-                                <Card.Title>{item.title}</Card.Title>
-                                <Card.Text>
-                                    {item.artist.name}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
-        </React.Fragment>
+        <div>
+            <InfiniteScroll
+                dataLength={state.data.length} //This is important field to render the next data
+                next={fetchMoreData}
+                hasMore={true}
+                loader={<h4>Loading...</h4>}
+                endMessage={
+                    <p style={{ textAlign: 'center' }} className='text-muted'>
+                        <b>Yay! That's all we have for now</b>
+                    </p>
+                }
+            >
+                <Row xs={1} md={4} className="g-6">
+
+                    {state.data.map((item, idx) => (
+                        <Col key={`music-card-${idx}`}>
+                            <Card>
+                                <Card.Img variant="top" src={item.album.cover_big} />
+                                <Card.Body>
+                                    <Card.Title>{item.title}</Card.Title>
+                                    <Card.Text>
+                                        {item.artist.name}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+
+                </Row>
+            </InfiniteScroll>
+        </div>
     )
 
 }
@@ -56,25 +76,5 @@ export default function Home() {
             <Divider height='20px' background='white' />
             <Main />
         </Layout>
-    )
-}
-
-
-function MusicCard({ header, title, children }) {
-    return (
-        <Card
-            bg='dark'
-            text='light'
-            style={{ width: '18rem' }}
-            className="mb-2"
-        >
-            <Card.Header>{header}</Card.Header>
-            <Card.Body>
-                <Card.Title>{title}</Card.Title>
-                <Card.Text>
-                    {/* {children}  */}
-                </Card.Text>
-            </Card.Body>
-        </Card>
     )
 }
