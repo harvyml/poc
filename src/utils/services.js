@@ -28,7 +28,7 @@ export function isLoggedIn() {
     const uid = localStorage.getItem('uid')
     const loggedInUser = users.find(user => user.uid == uid)
     if (loggedInUser) {
-        window.location.replace("/panel/music");
+        window.location.replace("/panel/home");
     }
 }
 
@@ -42,8 +42,13 @@ export function getUserData(){
     return null
 }
 
-export async function fetchBy({ keyword, startAt, limit }) {
+export async function fetchManyBy({ keyword, startAt, limit }) {
     const request = await fetch(`${api}/search?q=${keyword}&index=${startAt}&limit=${limit}`, { method: "GET" })
     return await request.json()
 
+}
+
+export async function fetchTrackBy({ id }){
+    const request = await fetch(`${api}/track/${id}`, { method: "GET" })
+    return await request.json()
 }
