@@ -46,7 +46,12 @@ export async function fetchManyBy({ keyword, startAt, limit }) {
 
 }
 
-export async function fetchTrackBy({ id }){
+export async function fetchTrackById({ id }){
     const request = await fetch(`${api}/track/${id}`, { method: "GET" })
+    return await request.json()
+}
+
+export async function fetchTrackByName({keyword, startAt, limit}){
+    const request = await fetch(`${api}/search?q=${keyword}&index=${startAt}&limit=${limit}`, { method: "GET" })
     return await request.json()
 }
