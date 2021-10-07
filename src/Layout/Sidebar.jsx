@@ -23,7 +23,6 @@ export default function Sidebar(props) {
 
 
 function Sidenav() {
-    let currentPath = ''
     return (
         <Nav defaultActiveKey="/home" className="flex-column sidenav">
             <SideNavLink href={`/panel/home`}>Home</SideNavLink>

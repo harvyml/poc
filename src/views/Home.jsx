@@ -1,12 +1,13 @@
 import Layout from "../Layout";
-import { CustomDiv, Divider } from "../components/CustomStyling";
-import { fetchManyBy } from "../utils/services";
+import { CustomDiv, Divider, Flex } from "../components/CustomStyling";
+import { fetchManyBy, setFavoriteSong } from "../utils/services";
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col, Button } from "react-bootstrap";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 // svg loader
 import Spinner from "../assets/spinner.svg";
+import Heart from '../assets/heart.svg'
 import Search from "./Search";
 
 
@@ -36,10 +37,15 @@ function Main() {
         })
     }
 
+    function setFavorite(e){
+        const id = e.target.getAttribute('item-id')
+        setFavoriteSong({id})
+    }
+
     return (
         <div>
-            <Search setMusic={setMusic} setKeyword={setKeyword} keyword={keyword} page={page} setStartingKeyword={setStartingKeyword}/>
-            <Divider height='50px' background='white'/>
+            <Search setMusic={setMusic} setKeyword={setKeyword} keyword={keyword} page={page} setStartingKeyword={setStartingKeyword} />
+            <Divider height='50px' background='white' />
             <h3>Results for {startingKeyword}</h3>
             <InfiniteScroll
                 dataLength={music.length} //This is important field to render the next data
@@ -56,23 +62,10 @@ function Main() {
                     </p>
                 }
             >
-                <Row xs={1} md={4} className="g-6">
-                    {music.map((item, idx) => {
-                        return (
-                            <Col key={`music-card-${idx}`} style={{ margin: "10px 0", cursor: "pointer" }}>
-                                <Card>
-                                    <Card.Img variant="top" src={item.album?.cover_big} />
-                                    <Card.Body>
-                                        <Card.Title>{item.title}</Card.Title>
-                                        <Card.Text>
-                                            {item.artist.name}
-                                        </Card.Text>
-                                        <a href={`/panel/track/${item.id}`}>Details</a>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        )
-                    })}
+                <Row xs={1} md={4} className="g-6" onClick={setFavorite}>
+                    {music.map((item, idx) => (
+                        <TrackCard item={item} key={`music-card-${idx}`} />
+                    ))}
 
                 </Row>
             </InfiniteScroll>
@@ -82,6 +75,30 @@ function Main() {
 }
 
 // ====== components ========
+function TrackCard({ item = {} }) {
+    return (
+        <Col style={{ margin: "10px 0", cursor: "pointer" }}>
+            <Card>
+                <Card.Img variant="top" src={item.album?.cover_big} />
+                <Card.Body>
+                    <Row>
+                        <Col sm={8}>
+                            <Card.Title>{item.title}</Card.Title>
+                            <Card.Text>
+                                {item.artist.name}
+                            </Card.Text>
+                        </Col>
+                        <Col>
+                            <CustomDiv width='100%' textAlign='right'>
+                                <Button variant='light' item-id={item.id}><img src={Heart} item-id={item.id}/></Button>
+                            </CustomDiv>
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card>
+        </Col>
+    )
+}
 export default function Home() {
     return (
         <Layout>
