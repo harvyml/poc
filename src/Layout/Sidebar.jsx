@@ -26,7 +26,7 @@ function Sidenav() {
     return (
         <Nav defaultActiveKey="/home" className="flex-column sidenav">
             <SideNavLink href={`/panel/home`}>Home</SideNavLink>
-            <SideNavLink href={`/panel/dummy`}>Dummy</SideNavLink>
+            <SideNavLink href={`/panel/favorites`}>Favorite</SideNavLink>
             <SideNavLink className="btn-logout" >
                 Logout
             </SideNavLink>

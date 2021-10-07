@@ -56,19 +56,20 @@ export async function fetchTrackByName({ keyword, startAt, limit }) {
     return await request.json()
 }
 
-export function setFavoriteSong({ id }) {
-    var favoriteSongs = JSON.parse(localStorage.getItem("favoriteSongs"));
+export function setFavoriteSong(item) {
+    var favoriteSongs = localStorage.getItem("favoriteSongs") && JSON.parse(localStorage.getItem("favoriteSongs"));
     if (!favoriteSongs) {
         try {
-            let newFavoriteSongs = [id]
+            let newFavoriteSongs = [item]
             localStorage.setItem('favoriteSongs', JSON.stringify(newFavoriteSongs))
-            return { ...id, okay: true }
+            return { ...item, okay: true }
         } catch (err) {
             
             return { ...err, okay: false }
         }
     }
 
-    let newFavoriteSongs = [...favoriteSongs, id]
+    let newFavoriteSongs = [...favoriteSongs, item]
     localStorage.setItem('favoriteSongs', JSON.stringify(newFavoriteSongs))
+    console.log(localStorage.getItem('favoriteSongs'))
 }

@@ -1,15 +1,14 @@
 import Layout from "../Layout";
-import { CustomDiv, Divider, Flex } from "../components/CustomStyling";
-import { fetchManyBy, setFavoriteSong } from "../utils/services";
+import { CustomDiv, Divider } from "../components/CustomStyling";
+import { fetchManyBy, fetchTrackById, setFavoriteSong } from "../utils/services";
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col, Button } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import TrackCard from "../components/TrackCard";
 // svg loader
 import Spinner from "../assets/spinner.svg";
-import Heart from '../assets/heart.svg'
 import Search from "./Search";
-
+import { HeartFill } from "react-bootstrap-icons";
 
 function Main() {
     const [music, setMusic] = useState([])
@@ -28,18 +27,19 @@ function Main() {
 
     useEffect(() => {
         setTimeout(fetchData, 1000)
-    }, [page.startAt, page.limit])
+    }, [page.startAt])
 
 
     function fetchMoreData() {
         setPage(current => {
-            return { startAt: current.startAt + 20, limit: current.limit + 20 }
+            return { startAt: current.startAt + 20, limit: current.limit }
         })
     }
 
-    function setFavorite(e){
+    async function setFavorite(e) {
         const id = e.target.getAttribute('item-id')
-        setFavoriteSong({id})
+        const request = await fetchTrackById({id})
+        setFavoriteSong({...request})
     }
 
     return (
@@ -75,30 +75,6 @@ function Main() {
 }
 
 // ====== components ========
-function TrackCard({ item = {} }) {
-    return (
-        <Col style={{ margin: "10px 0", cursor: "pointer" }}>
-            <Card>
-                <Card.Img variant="top" src={item.album?.cover_big} />
-                <Card.Body>
-                    <Row>
-                        <Col sm={8}>
-                            <Card.Title>{item.title}</Card.Title>
-                            <Card.Text>
-                                {item.artist.name}
-                            </Card.Text>
-                        </Col>
-                        <Col>
-                            <CustomDiv width='100%' textAlign='right'>
-                                <Button variant='light' item-id={item.id}><img src={Heart} item-id={item.id}/></Button>
-                            </CustomDiv>
-                        </Col>
-                    </Row>
-                </Card.Body>
-            </Card>
-        </Col>
-    )
-}
 export default function Home() {
     return (
         <Layout>
