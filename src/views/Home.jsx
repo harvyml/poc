@@ -1,9 +1,12 @@
 import Layout from "../Layout";
-import { Divider } from "../components/CustomStyling";
+import { CustomDiv, Divider, Layer } from "../components/CustomStyling";
 import { fetchBy } from "../utils/services";
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import InfiniteScroll from 'react-infinite-scroll-component';
+
+// svg loader
+import Spinner from "../assets/spinner.svg";
 function Main() {
     const [state, setState] = useState({
         data: []
@@ -39,7 +42,11 @@ function Main() {
                 dataLength={state.data.length} //This is important field to render the next data
                 next={fetchMoreData}
                 hasMore={true}
-                loader={<h4>Loading...</h4>}
+                loader={    
+                    <CustomDiv textAlign='center' margin='20px auto' width='50px'>
+                        <img src={Spinner}/>
+                    </CustomDiv>
+                }
                 endMessage={
                     <p style={{ textAlign: 'center' }} className='text-muted'>
                         <b>Yay! That's all we have for now</b>
