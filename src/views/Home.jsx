@@ -69,7 +69,7 @@ function Main() {
 
 }
 
-// ====== components ========
+// ====== export ========
 export default function Home() {
     return (
         <Layout>

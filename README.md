@@ -21,3 +21,7 @@ You can also see the songs you marked as favorite in the favorite tab.
 #### Git Flow:
 
 The app was created using only a main branch while creating pull requests for each new feature about to release to the main branch
+
+#### Deployment
+
+This app is hosted on netflify
