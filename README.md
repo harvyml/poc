@@ -10,6 +10,15 @@ The app also uses *react-query* only on the pages where a fetch is done just onc
 The app uses a library for the pagination system, if you scroll down to the bottom of the screen the next 20 elements will be loaded.
 
 You can also search for songs with the search input located in *Home*.
+
+## Run Locally
+```
+git clone git@github.com:harvyml/poc.git
+cd poc
+npm install
+npm start
+```
+
 ## App porpose
 
 This is a very simple app in wich you can search and set as song as a favorite song, this is persisted between app launches. 
@@ -24,4 +33,4 @@ The app was created using only a main branch while creating pull requests for ea
 
 #### Deployment
 
-This app is hosted on netflify
+This app is hosted on heroku
