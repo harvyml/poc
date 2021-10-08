@@ -64,12 +64,42 @@ export function setFavoriteSong(item) {
             localStorage.setItem('favoriteSongs', JSON.stringify(newFavoriteSongs))
             return { ...item, okay: true }
         } catch (err) {
-            
+
             return { ...err, okay: false }
         }
     }
 
     let newFavoriteSongs = [...favoriteSongs, item]
     localStorage.setItem('favoriteSongs', JSON.stringify(newFavoriteSongs))
-    console.log(localStorage.getItem('favoriteSongs'))
+}
+
+export function removeFavoriteSong({ id }) {
+    var favoriteSongs = localStorage.getItem("favoriteSongs") && JSON.parse(localStorage.getItem("favoriteSongs"));
+    favoriteSongs.forEach((item, idx) => {
+        if (item.id == id) {
+            console.log("removing idx", idx)
+            favoriteSongs.splice(idx, 1)
+            localStorage.setItem("favoriteSongs", JSON.stringify(favoriteSongs))
+            return { ok: true }
+        }
+    })
+    console.log('not removed')
+    return { ok: false, msg: 'id does not exist' }
+}
+
+export async function setFavorite(e, reload = false) {
+    const id = e.target.getAttribute('item-id')
+    const request = await fetchTrackById({ id })
+    const element = e.target.parentElement.querySelector('img')
+    if (element.classList == 'heart-fill') {
+        element.classList.remove("heart-fill")
+        removeFavoriteSong({ id })
+        if (reload) {
+            window.location.reload()
+            return false
+        }
+        return element.classList
+    }
+    element.classList.add('heart-fill')
+    setFavoriteSong({ ...request })
 }

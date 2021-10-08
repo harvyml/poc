@@ -1,3 +1,8 @@
 img{
     width: 100%;
 }
+
+img.heart-fill:not(.card-img-top){
+    content: url('https://w7.pngwing.com/pngs/570/1019/png-transparent-computer-icons-heart-filled-love-heart-black.png');
+    height: 20px;
+}

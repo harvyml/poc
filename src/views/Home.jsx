@@ -1,6 +1,6 @@
 import Layout from "../Layout";
 import { CustomDiv, Divider } from "../components/CustomStyling";
-import { fetchManyBy, fetchTrackById, setFavoriteSong } from "../utils/services";
+import { fetchManyBy, setFavorite } from "../utils/services";
 import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -8,9 +8,10 @@ import TrackCard from "../components/TrackCard";
 // svg loader
 import Spinner from "../assets/spinner.svg";
 import Search from "./Search";
-import { HeartFill } from "react-bootstrap-icons";
+import { useRouteMatch } from "react-router";
 
 function Main() {
+    const {path} = useRouteMatch()
     const [music, setMusic] = useState([])
     const [keyword, setKeyword] = useState('andres cepeda')
     const [startingKeyword, setStartingKeyword] = useState(keyword)
@@ -36,12 +37,6 @@ function Main() {
         })
     }
 
-    async function setFavorite(e) {
-        const id = e.target.getAttribute('item-id')
-        const request = await fetchTrackById({id})
-        setFavoriteSong({...request})
-    }
-
     return (
         <div>
             <Search setMusic={setMusic} setKeyword={setKeyword} keyword={keyword} page={page} setStartingKeyword={setStartingKeyword} />
@@ -63,9 +58,9 @@ function Main() {
                 }
             >
                 <Row xs={1} md={4} className="g-6" onClick={setFavorite}>
-                    {music.map((item, idx) => (
-                        <TrackCard item={item} key={`music-card-${idx}`} />
-                    ))}
+                    {music.map((item, idx) => {
+                        return item && <TrackCard item={item} key={`music-card-${idx}`} path={path}/>
+                    })}
 
                 </Row>
             </InfiniteScroll>
