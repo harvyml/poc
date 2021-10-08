@@ -2,9 +2,8 @@ import { data } from "./db"
 const { users } = data;
 
 const api = (function(){
-    console.log(window.location.protocol)
     if(window.location.protocol == "https:"){
-        return "https://api.deezer.com"
+        return "https://cors-anywhere.herokuapp.com/https://api.deezer.com"
     }
     return 'https://thingproxy.freeboard.io/fetch/https://api.deezer.com'
 })()
