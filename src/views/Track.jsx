@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { QueryClientProvider, useQuery, QueryClient } from "react-query";
 import { useParams } from "react-router";
 import { CustomDiv, Divider } from '../components/CustomStyling';
@@ -32,7 +33,7 @@ function TrackInfo() {
     const { isLoading, error, data: track } = useQuery('track', () => fetchTrackById({ id }))
     if (isLoading) {
         return (
-            <CustomDiv>
+            <CustomDiv width='50px' margin='auto'>
                 <img src={Spinner} />
             </CustomDiv>
         )
@@ -59,14 +60,14 @@ function TrackInfo() {
                                 // if its the last item or the list only has one item then dont add a coma
                                 const coma = (track.contributors.length - 1 === idx) || (track.contributors.length === 1) ? "" : ', ' 
                                 return (
-                                    <span>
+                                    <span key={`contributor-${contributor.id}`}>
                                         <a className='text-muted' href={contributor.link} key={`contributor-${idx}`}>{contributor.name}</a>{coma}
                                     </span>
                                 )
                             })}
                         </p>
-                        <p><a href={track.link}>Listen to the track</a></p>
-                        <p><a href={track.album.link}>Check out the full album {track.album.title}</a></p>
+                        <p><Link to={track.link}>Listen to the track</Link></p>
+                        <p><Link to={track.album.link}>Check out the full album {track.album.title}</Link></p>
                     </div>
                 </Col>
             </Row>

@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import { Nav } from 'react-bootstrap'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 // custom components
 import { CustomDiv, SideNavLink } from '../components/CustomStyling'
 // custom images
@@ -13,8 +14,10 @@ const StyledSideNav = styled.div`
 export default function Sidebar(props) {
     return (
         <StyledSideNav>
-            <CustomDiv width='50px' margin='20px auto'>
-                <img src={RandomLogo}/>
+            <CustomDiv width='100px' margin='20px auto' background='transparent'>
+                <Link to='/panel/home'>
+                    <img src={RandomLogo} />
+                </Link>
             </CustomDiv>
             <Sidenav {...props} />
         </StyledSideNav>
@@ -23,12 +26,11 @@ export default function Sidebar(props) {
 
 
 function Sidenav() {
-    let currentPath = ''
     return (
         <Nav defaultActiveKey="/home" className="flex-column sidenav">
             <SideNavLink href={`/panel/home`}>Home</SideNavLink>
-            <SideNavLink href={`/panel/dummy`}>Dummy</SideNavLink>
-            <SideNavLink className="btn-logout" >
+            <SideNavLink href={`/panel/favorites`}>Favorite</SideNavLink>
+            <SideNavLink className="btn-logout" color='red'>
                 Logout
             </SideNavLink>
         </Nav>
