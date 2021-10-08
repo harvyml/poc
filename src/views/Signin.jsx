@@ -1,10 +1,12 @@
 import { Formik } from 'formik';
 import { useEffect, useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Alert, Col } from 'react-bootstrap';
 import { Title, Divider, CustomDiv } from '../components/CustomStyling';
-import { isLoggedIn, onSignin } from '../utils/services';
+import { getUserData, isLoggedIn, onSignin } from '../utils/services';
 
 export default function Signin() {
+	const [loginError, setLoginError] = useState(false)
+
 	useEffect(() => isLoggedIn(), [])
 	return (
 		<Container>
@@ -25,15 +27,18 @@ export default function Signin() {
 					return errors;
 				}}
 				onSubmit={(values, { setSubmitting }) => {
-					setTimeout(() => {
-						onSignin(values)
-						setSubmitting(false);
-					}, 400);
+					onSignin(values)
+					setSubmitting(false);
+					if (getUserData().code === 3001) {
+						setLoginError(true)
+					}
+					isLoggedIn()
 				}}
 			>
 				{({
 					values,
 					errors,
+					touched,
 					handleChange,
 					handleBlur,
 					handleSubmit,
@@ -51,6 +56,9 @@ export default function Signin() {
 									value={values.email}
 								>
 									<Form.Control placeholder='Email' name='email' />
+									<CustomDiv textAlign='left' margin='5px 0' width='100%'>
+										{errors.email && touched.email && errors.email}
+									</CustomDiv>
 								</Form.Group>
 								<Divider height='2px' margin='5px auto' background='white' />
 								<Form.Group
@@ -60,9 +68,18 @@ export default function Signin() {
 									onBlur={handleBlur}
 									value={values.password}
 								>
-									<Form.Control placeholder='Password' name='password' />
+									<Form.Control placeholder='Password' name='password' type='password' />
 								</Form.Group>
 								<Divider height='2px' margin='10px auto' background='white' />
+								<CustomDiv width='100%' background='white' margin='auto' textAlign='left'>
+									{
+										loginError && (
+											<Alert variant='danger'>
+												Incorrect email or password.
+											</Alert>
+										)
+									}
+								</CustomDiv>
 								<Button type="submit" disabled={isSubmitting}>
 									Submit
 								</Button>

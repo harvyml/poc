@@ -1,6 +1,7 @@
 import { Card, Row, Col, Button } from "react-bootstrap"
 import { CustomDiv, Divider } from "./CustomStyling"
 import Heart from '../assets/heart.svg'
+import { Link } from "react-router-dom"
 
 const favoriteSongs = localStorage.getItem('favoriteSongs') && JSON.parse(localStorage.getItem('favoriteSongs'))
 
@@ -24,7 +25,7 @@ export default function TrackCardFavorite({ item = {} }) {
                             </CustomDiv>
                         </Col>
                         <Divider height='15px' background='white' />
-                        <a variant='light' href={`/panel/track/${item.id}`}>Details</a>
+                        <Link variant='light' to={`/panel/track/${item.id}`}>Details</Link>
                     </Row>
                 </Card.Body>
             </Card>

@@ -10,7 +10,6 @@ export default function Favorites() {
     useEffect(() => {
         let favorites = localStorage.getItem('favoriteSongs') && JSON.parse(localStorage.getItem('favoriteSongs'))
         favorites && setFavorites(favorites)
-        console.log("Favorites: ", favorites.length)
     }, [])
     return (
         <Layout>

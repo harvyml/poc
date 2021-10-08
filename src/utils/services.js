@@ -18,7 +18,7 @@ export function onSignin({ email, password }) {
 
     if (isPasswordCorrect) {
         localStorage.setItem("uid", user.uid)
-        return { ...user, code: 2001 }
+        return { ...user, code: 2000 }
     }
 }
 
@@ -35,9 +35,9 @@ export function getUserData() {
     const uid = localStorage.getItem('uid')
     const loggedInUser = users.find(user => user.uid == uid)
     if (loggedInUser) {
-        return loggedInUser
+        return {...loggedInUser, code: 2000}
     }
-    return null
+    return {...loggedInUser, code: 3001}
 }
 
 export async function fetchManyBy({ keyword, startAt, limit }) {

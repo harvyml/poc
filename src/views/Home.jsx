@@ -41,7 +41,7 @@ function Main() {
         <div>
             <Search setMusic={setMusic} setKeyword={setKeyword} keyword={keyword} page={page} setStartingKeyword={setStartingKeyword} />
             <Divider height='50px' background='white' />
-            <h3>Results for {startingKeyword}</h3>
+            <h3>Results for: <span style={{color: '#0d6efd'}}>{startingKeyword}</span></h3>
             <InfiniteScroll
                 dataLength={music.length} //This is important field to render the next data
                 next={fetchMoreData}
