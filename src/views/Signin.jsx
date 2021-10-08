@@ -55,7 +55,7 @@ export default function Signin() {
 									onBlur={handleBlur}
 									value={values.email}
 								>
-									<Form.Control placeholder='Email' name='email' />
+									<Form.Control type='email' placeholder='Email' name='email' />
 									<CustomDiv textAlign='left' margin='5px 0' width='100%'>
 										{errors.email && touched.email && errors.email}
 									</CustomDiv>
