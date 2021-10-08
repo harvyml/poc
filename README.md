@@ -21,7 +21,7 @@ npm install
 npm start
 ```
 
-## App porpose
+## App purpose
 
 This is a very simple app in wich you can search and set as song as a favorite song, this is persisted between app launches. 
 You can search for songs and view them in more detail when opening a certain song.
