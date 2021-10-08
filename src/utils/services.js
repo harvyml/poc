@@ -2,10 +2,11 @@ import { data } from "./db"
 const { users } = data;
 
 const api = (function(){
-    if(!window.location.protocol == "https:"){
-        return 'https://thingproxy.freeboard.io/fetch/https://api.deezer.com'
+    console.log(window.location.protocol)
+    if(window.location.protocol == "https:"){
+        return "https://api.deezer.com"
     }
-    return "https://api.deezer.com"
+    return 'https://thingproxy.freeboard.io/fetch/https://api.deezer.com'
 })()
 /**
  * onSignin
