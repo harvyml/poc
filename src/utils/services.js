@@ -2,10 +2,6 @@ import { data } from "./db"
 const { users } = data;
 
 const api = 'https://thingproxy.freeboard.io/fetch/https://api.deezer.com'
-
-const fetchConfig = {
-    mode: 'no-cors'
-}
 /**
  * onSignin
  * @param {Object}: {email, password}
@@ -44,18 +40,18 @@ export function getUserData() {
 }
 
 export async function fetchManyBy({ keyword, startAt, limit }) {
-    const request = await fetch(`${api}/search?q=${keyword}&index=${startAt}&limit=${limit}`, { method: "GET", ...fetchConfig })
+    const request = await fetch(`${api}/search?q=${keyword}&index=${startAt}&limit=${limit}`, { method: "GET" })
     return await request.json()
 
 }
 
 export async function fetchTrackById({ id }) {
-    const request = await fetch(`${api}/track/${id}`, { method: "GET", ...fetchConfig })
+    const request = await fetch(`${api}/track/${id}`, { method: "GET" })
     return await request.json()
 }
 
 export async function fetchTrackByName({ keyword, startAt, limit }) {
-    const request = await fetch(`${api}/search?q=${keyword}&index=${startAt}&limit=${limit}`, { method: "GET", ...fetchConfig })
+    const request = await fetch(`${api}/search?q=${keyword}&index=${startAt}&limit=${limit}`, { method: "GET" })
     return await request.json()
 }
 
