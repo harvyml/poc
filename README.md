@@ -14,8 +14,8 @@ You can also search for songs with the search input located in *Home*.
 ## Run Locally
 
 #### NO LONGER NEEDED:
-<span style='color: #ccc'>This app uses a proxy server for retrieving data from the deezer api. To activate this proxy go to: [https://cors-anywhere.herokuapp.com/corsdemo](https://cors-anywhere.herokuapp.com/corsdemo) and click request button.
-</span>
+<p style='color: #ccc'>This app uses a proxy server for retrieving data from the deezer api. To activate this proxy go to: [https://cors-anywhere.herokuapp.com/corsdemo](https://cors-anywhere.herokuapp.com/corsdemo) and click request button.
+</p>
 ----------------------
 
 
