@@ -12,8 +12,13 @@ The app uses a library for the pagination system, if you scroll down to the bott
 You can also search for songs with the search input located in *Home*.
 
 ## Run Locally
-This app uses a proxy server for retrieving data from the deezer api.
-To activate this proxy go to: [https://cors-anywhere.herokuapp.com/corsdemo](https://cors-anywhere.herokuapp.com/corsdemo) and click request button.
+
+#### NO LONGER NEEDED:
+<span style='color: #ccc'>This app uses a proxy server for retrieving data from the deezer api. To activate this proxy go to: [https://cors-anywhere.herokuapp.com/corsdemo](https://cors-anywhere.herokuapp.com/corsdemo) and click request button.
+</span>
+----------------------
+
+
 ```
 git clone git@github.com:harvyml/poc.git
 cd poc
