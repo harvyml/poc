@@ -3,9 +3,9 @@ const { users } = data;
 
 const api = (function(){
     if(window.location.protocol == "https:"){
-        return "https://cors-anywhere.herokuapp.com/https://api.deezer.com"
+        return "https://cors.bridged.cc/https://api.deezer.com"
     }
-    return 'https://thingproxy.freeboard.io/fetch/https://api.deezer.com'
+    return 'https://cors.bridged.cc/https://api.deezer.com'
 })()
 /**
  * onSignin
